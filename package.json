@@ -1,0 +1,28 @@
+{
+  "name": "feedback-app",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Fullstack Feedback app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node feedback-app-backend/server.js",
+    "server": "nodemon feedback-app-backend/server.js",
+    "client": "npm start --prefix feedback-app-frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Jumgal Arymbaev",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^7.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.9.0",
+    "react-icons": "^4.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
