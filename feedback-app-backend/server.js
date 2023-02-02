@@ -1,7 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
-import connectDB from "./config/db.js";
+import { userRoutes } from "./routes/userRoutes.js";
 import { errorHandler } from "./middleware/errorMiddleware.js";
+import cors from 'cors'
+import connectDB from "./config/db.js";
 
 dotenv.config();
 
@@ -13,9 +15,10 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.send("Hi");
-});
+app.use(cors())
+
+// Routes
+app.use('/api/users', userRoutes)
 
 app.use(errorHandler);
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
