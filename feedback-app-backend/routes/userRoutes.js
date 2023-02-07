@@ -1,10 +1,10 @@
 import express from "express";
 import { body } from "express-validator";
-import { registerUser, loginUser } from "../controllers/userController.js";
+import { registerUser, loginUser, getAllUsers } from "../controllers/userController.js";
+import protect from "../middleware/authMiddleware.js";
 const router = express.Router();
 // import {registerUser, loginUser, getMe} from '../controllers/userController.js'
 
-// import protect from "../middleware/authMiddleware.js";
 
 router.post(
   "/",
@@ -54,6 +54,8 @@ router.post(
     .withMessage("Please provide valid email"),
   loginUser
 );
+
+router.get('/', protect, getAllUsers)
 // router.post('/login', loginUser)
 
 // router.get('/me', protect, getMe)

@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { validationResult } from "express-validator";
 import { BadRequest, NotFound } from "../errors/general-error.js";
+import Feedback from "../models/feedbackModel.js";
 
 // @desc    Register a new user
 // @route   /api/users
@@ -93,6 +94,21 @@ export const loginUser = async (req, res, next) => {
     } else {
       res.status(401);
       throw new BadRequest("Invalid Credentials");
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find({})
+    if (users) {
+      res.status(200);
+      res.json(users);
+    } else {
+      res.status(400);
+      throw new BadRequest("No users found. Please register users");
     }
   } catch (error) {
     next(error);
