@@ -72,7 +72,6 @@ export const loginUser = async (req, res, next) => {
 
   try {
     const errors = validationResult(req);
-    console.log("errors validation ", errors);
     if (!errors.isEmpty()) {
       res.status(400);
       throw new BadRequest("Please fill in all required login fields.");

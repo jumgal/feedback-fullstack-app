@@ -67,7 +67,7 @@ export const getAllComments = async (req, res, next) => {
 
 export const getFeedbackComments = async (req, res, next) => {
   try {
-    const feedback = await Feedback.findById(req.params.feedbackId).populate('comments', 'content');
+    const feedback = await Feedback.findById(req.params.feedbackId).populate('comments');
 
     if (!feedback) {
       res.status(400);

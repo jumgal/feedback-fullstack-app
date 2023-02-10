@@ -18,6 +18,6 @@ router.post(
 );
 
 router.get('/', getAllComments)
-router.get('/:feedbackId', getFeedbackComments)
+router.get('/:feedbackId', protect, getFeedbackComments)
 
 export { router as commentRoutes };

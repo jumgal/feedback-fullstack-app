@@ -11,7 +11,6 @@ export const createReply = async (req, res, next) => {
     const {commentId } = req.params;
     const user = req.user
     const errors = validationResult(req);
-    console.log("errors ", errors);
     if (!errors.isEmpty()) {
       res.status(400);
       throw new BadRequest("Please provide valid reply");
@@ -69,7 +68,6 @@ export const getAllReplies = async (req, res, next) => {
 export const getCommentReplies = async (req, res, next) => {
   try {
     const comment = await Comment.findById(req.params.commentId).populate('replies', 'content');
-
     if (!comment) {
       res.status(400);
       throw new Error("No comment. so no replies");
