@@ -10,7 +10,6 @@ export const createComment = async (req, res, next) => {
     const { feedbackId } = req.params;
     const user = req.user
     const errors = validationResult(req);
-    console.log("errors ", errors);
     if (!errors.isEmpty()) {
       res.status(400);
       throw new BadRequest("Please provide valid comment info");

@@ -46,6 +46,7 @@ export const createReply = async (req, res, next) => {
       throw new Error("Error occurred while creating your reply");
     }
   } catch (error) {
+    console.log('error ', error)
     next(error);
   }
 };
@@ -67,7 +68,7 @@ export const getAllReplies = async (req, res, next) => {
 
 export const getCommentReplies = async (req, res, next) => {
   try {
-    const comment = await Comment.findById(req.params.commentId).populate('replies', 'content');
+    const comment = await Comment.findById(req.params.commentId).populate('replies')
     if (!comment) {
       res.status(400);
       throw new Error("No comment. so no replies");
