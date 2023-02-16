@@ -21,7 +21,6 @@ export const registerUser = async (req, res, next) => {
       registerUsername,
       registerEmail,
       registerPassword,
-      registerImage = "",
     } = req.body;
 
     if (
@@ -48,7 +47,6 @@ export const registerUser = async (req, res, next) => {
       name: registerName,
       username: registerUsername,
       email: registerEmail,
-      image: registerImage,
       password: hashedPassword,
     });
 
@@ -58,7 +56,7 @@ export const registerUser = async (req, res, next) => {
         name: user.name,
         username: user.username,
         email: user.email,
-        image: user.image,
+        admin: user.admin,
         token: generateToken(user._id),
       });
     }
@@ -88,6 +86,7 @@ export const loginUser = async (req, res, next) => {
         _id: user._id,
         name: user.name,
         email: user.email,
+        admin: user.admin,
         token: generateToken(user._id),
       });
     } else {

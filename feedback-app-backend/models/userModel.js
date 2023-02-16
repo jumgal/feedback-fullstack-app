@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema(
       isRequired: true,
       unique: true,
     },
+    admin: {
+      type: Boolean,
+      default: false,
+    },
     image: {
       type: String,
       default: '/assets/user-images/default-image.jpg'
