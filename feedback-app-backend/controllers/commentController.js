@@ -8,7 +8,7 @@ export const createComment = async (req, res, next) => {
   try {
     const { content } = req.body;
     const { feedbackId } = req.params;
-    const user = req.user
+    const user = req.user;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.status(400);
@@ -24,9 +24,7 @@ export const createComment = async (req, res, next) => {
 
     if (!feedback) {
       res.status(400);
-      throw new Error(
-        "You need to have a feedback to comment"
-      );
+      throw new Error("You need to have a feedback to comment");
     }
 
     const comment = await Comment.create({
@@ -51,12 +49,11 @@ export const createComment = async (req, res, next) => {
 
 export const getAllComments = async (req, res, next) => {
   try {
-   
-    const comments = await Comment.find({})
-     
+    const comments = await Comment.find({});
+
     if (!comments) {
-     res.status(400)
-     throw new Error('no comments in db')
+      res.status(400);
+      throw new Error("no comments in db");
     }
     res.json(comments);
   } catch (error) {
@@ -65,9 +62,17 @@ export const getAllComments = async (req, res, next) => {
 };
 
 export const getFeedbackComments = async (req, res, next) => {
-  try {
-    const feedback = await Feedback.findById(req.params.feedbackId).populate('comments');
+  console.log(req.params);
 
+  try {
+    if (!req.params?.feedbackId) {
+      res.status(400);
+      throw new Error("Feedback id needs to be provided!");
+    }
+    const feedback = await Feedback.findById(req.params.feedbackId).populate(
+      "comments"
+    );
+    console.log(feedback);
     if (!feedback) {
       res.status(400);
       throw new Error("No feedback. so no comments");
